@@ -1,0 +1,39 @@
+<div class="news-form">
+		<form no-uniform>
+			<label>
+				Søg efter:
+				<input type="text" ng-model="skyNewsCtrl.query.keywords" placeholder="Søgetekst ..." />
+			</label>
+			<label>
+				Vælg en bestemt kategori:
+				<select ng-model="skyNewsCtrl.query.category">
+					<option value="">Alle kategorier</option>
+					<option value="1">Kategori 1</option>
+					<option value="2">Kategori 2</option>
+					<option value="3">Kategori 3</option>
+					<option value="4">Kategori 4</option>
+				</select>
+			</label>
+		</form>
+	</div>
+	<div class="search-results news" ng-if="skyNewsCtrl.data.items.length">
+
+		<div class="search-message" ng-if="skyNewsCtrl.data.items">Din søgning gav <strong>{{skyNewsCtrl.data.pagination.total}} resultater</strong></div>
+
+		<ul>
+			<li ng-repeat="result in skyNewsCtrl.data.items track by result.id">
+
+				<h5><a ng-href="{{result.url}}">{{result.name}}</a></h5>
+				<p class="teaser" ng-if="result.teaser.length > 0">{{result.teaser}}</p>
+				<small class="meta">{{result.newsDate | date:'longDate'}}</small>
+			</li>
+		</ul>
+	</div>
+
+	<div class="search-more" ng-if="skyNewsCtrl.data.pagination.total>skyNewsCtrl.data.items.length">
+		<div class="button" ng-click="skyNewsCtrl.showMore()">
+			<span>Indlæs flere (af i alt {{skyNewsCtrl.data.pagination.total}})</span>
+		</div>
+	</div>
+
+</div>

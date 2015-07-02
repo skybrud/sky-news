@@ -1,7 +1,6 @@
-/* global angular */
-(function () {
+(function() {
 	'use strict';
-
-	angular.module('skyNews',['skyList']);
-
+	
+	angular.module('skyNews',['skyList']);	
+	
 })();

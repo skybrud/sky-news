@@ -31,9 +31,12 @@
 					newsList.getResults(_this.query);
 				},true);
 				
-				
 			});
-
+			
+			$scope.$on('$destroy', function() {
+				skyList.killInstance('news');
+			});
+		
 		}
 		
 		return directive;

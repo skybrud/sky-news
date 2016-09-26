@@ -14,14 +14,20 @@
 			controllerAs:'skyNewsCtrl'
 		};
 
-		function controller() {
+		controller.$inject = ['$scope'];
+
+		function controller($scope) {
 			let configuration = {
 				api: '/umbraco/api/newsapi/search',
 				limit:5
 			};
 
+			this.query = {
+				// Optional: Define default properties here
+			};
+
 			skyList.createInstance('news',configuration).then((list) => {
-				this.query = list.query;
+				this.query = angular.merge(list.query, this.query);
 				this.data = list.results;
 				this.showMore = list.nextPage;
 
@@ -32,6 +38,10 @@
 				$rootScope.$watchCollection(()=> this.query, () => {
 					list.getResults();
 				});
+			});
+
+			$scope.$on('$destroy', function() {
+				skyList.killInstance('news');
 			});
 		}
 	}

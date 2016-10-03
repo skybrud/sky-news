@@ -6,7 +6,7 @@
 	skyNewsDirective.$inject = ['$rootScope', 'skyList', 'skyQueryString'];
 
 	function skyNewsDirective($rootScope, skyList, skyQueryString) {
-		 return {
+		let directive = {
 			restrict:'E',
 			templateUrl:'/sky-news/sky-news.template.html',
 			scope:{},
@@ -44,6 +44,8 @@
 				skyList.killInstance('news');
 			});
 		}
+
+		return directive;
 	}
 
 })();
